@@ -1,3 +1,4 @@
+#In this SQL, I'm querying a database to raise more donations with informations provided in Donantion and Donor tables.
 To find out how many donations was made.
 SELECT COUNT(donation)
 FROM donation_data;
