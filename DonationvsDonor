@@ -1,0 +1,146 @@
+To find out how many donations was made.
+SELECT COUNT(donation)
+FROM donation_data;
+
+To find out MAX(Donation) was made.
+SELECT MAX (donation)
+FROM donation_data;
+
+To find out MIN(Donation) was made.
+SELECT MIN (donation)
+FROM donation_data;
+
+To find out AVG(Donation) was made.
+SELECT AVG (donation)
+FROM donation_data;
+
+Average donation vary per job field(DESC)
+SELECT round(avg(donation),2), job_field
+FROM donation_data
+GROUP by job_field
+ORDER by avg(donation) DESC
+limit 5;
+
+Average donation vary per job field(ASC)
+SELECT round(avg(donation),2), job_field
+FROM donation_data
+GROUP by job_field
+ORDER by avg(donation) ASC
+limit 5;
+
+Average donation vary per STATE(DESC)
+SELECT state, ROUND(AVG(donation),2)
+FROM donation_data
+GROUP by state
+ORDER by avg(donation) DESC
+limit 5;
+
+#Average donation vary per STATE(ASC)
+SELECT state, ROUND(AVG(donation),2)
+FROM donation_data
+GROUP by state
+ORDER by avg(donation) ASC
+limit 5;
+
+Donor COUNT(STATE)
+SELECT state, donation, COUNT(*)
+FROM donation_data
+GROUP BY state
+ORDER BY COUNT (*) DESC
+LIMIT 5;
+
+DONATION FREQUENCY(Once,weekly,monthly)
+SELECT donation_frequency, SUM(donation)
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+where donation_frequency = ‘Once' ;
+
+GENDER
+SELECT gender,SUM(donation)
+FROM donation_data
+WHERE gender = 'Male’;
+SELECT gender,SUM(donation)
+FROM donation_data
+WHERE gender = ‘Female’ ;
+
+
+# Select Males that attend university and donated more than $400
+SELECT donation_data.id, donation_data.first_name, donation_data.last_name, donation_data.gender, donation_data.donation, donor_data.university
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+WHERE gender = 'Male'
+and university is not NULL
+and donation > 400
+ORDER by donation desc;
+
+#Select Males that didnt attend university and donated more than $400
+SELECT donation_data.id, donation_data.first_name, donation_data.last_name, donation_data.gender, donation_data.donation, donor_data.university
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+WHERE gender = 'Male'
+and university is NULL
+and donation > 400
+ORDER by donation desc;
+
+#Select Females that attend university and donated more than $400
+SELECT donation_data.id, donation_data.first_name, donation_data.last_name, donation_data.gender, donation_data.donation, donor_data.university
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+WHERE gender = 'Female'
+and university is not NULL
+and donation > 400
+ORDER by donation desc;
+
+#Select Females that didnt attend university and donated more than $400
+SELECT donation_data.id, donation_data.first_name, donation_data.last_name, donation_data.gender, donation_data.donation, donor_data.university
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+WHERE gender = 'Female'
+and university is NULL
+and donation > 400
+ORDER by donation desc;
+
+GENDER(CAR)
+SELECT donation_data.id, donation_data.first_name, donation_data.last_name, donation_data.gender, donation_data.donation, donor_data.university
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+WHERE gender = 'Male'
+and car is not NULL
+and donation > 400
+ORDER by donation desc;
+
+GENDER(CAR)
+SELECT donation_data.id, donation_data.first_name, donation_data.last_name, donation_data.gender, donation_data.donation, donor_data.university
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+WHERE gender = 'Male'
+and car is NULL
+and donation > 400
+ORDER by donation desc;
+
+GENDER(CAR)
+SELECT donation_data.id, donation_data.first_name, donation_data.last_name, donation_data.gender, donation_data.donation, donor_data.university
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+WHERE gender = 'Female'
+and car is not NULL
+and donation > 400
+ORDER by donation desc;
+
+GENDER(CAR)
+SELECT donation_data.id, donation_data.first_name, donation_data.last_name, donation_data.gender, donation_data.donation, donor_data.university
+from donation_data
+left join donor_data
+on donation_data.id = donor_data.id
+WHERE gender = 'Female'
+and car is NULL
+and donation > 400
+ORDER by donation desc;
